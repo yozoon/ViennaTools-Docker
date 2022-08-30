@@ -1,3 +1,4 @@
+output/
 *.tar
 *a.out
 build*
