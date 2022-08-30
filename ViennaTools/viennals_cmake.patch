@@ -1,0 +1,23 @@
+--- c.cmake	2022-08-30 23:09:36.929287351 +0200
++++ d.cmake	2022-08-30 23:32:36.588006871 +0200
+@@ -41,6 +41,12 @@
+ 
+ ## build dependencies
+ set(DEPENDENCIES_DIR ${CMAKE_SOURCE_DIR}/dependencies)
++
++find_package(VTK REQUIRED COMPONENTS
++  vtkCommonCore
++  vtkCommonDataModel
++  vtkIOXML)
++
+ # if using external VTK build because it takes long to rebuild
+ # move value of VTK_DIR to cache so it is not overwritten
+ # by external project
+@@ -122,7 +128,6 @@
+ endif(VIENNALS_BUILD_SHARED_LIBS)
+ 
+ # set the correct paths for installation
+-set(CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}/")
+ set(LOCAL_CONFIG_DIR "lib/cmake/${PROJECT_NAME}")
+ 
+ # Adding the install interface generator expression makes sure that the include

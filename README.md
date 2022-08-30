@@ -20,26 +20,26 @@ Depending on your internet connection, this could take a while, since overall ab
 The image can then be exported for distribution using the following command:
 
 ```bash
-docker save docker-viennaps:latest > viennaps.tar
+docker save docker-viennatools:latest > viennatools.tar
 ```
 
 Or directly compress the image file as it is being written using gzip:
 
 ```bash
-docker save docker-viennaps:latest | gzip > viennaps.tar.gz
+docker save docker-viennatools:latest | gzip > viennatools.tar.gz
 ```
 
 ## Using a pre-built Image
 
 The fastest way to get started is by using a pre-built image.
 ```bash
-docker load < viennaps.tar
+docker load < viennatools.tar
 ```
 
 The _docker load_ command also supports loading of compressed image files, such as _*.tar.gz_. A full list of supported compression algorithms can be found [here](https://docs.docker.com/engine/reference/commandline/load/).
 
 ```bash
-docker load < viennaps.tar.gz
+docker load < viennatools.tar.gz
 ```
 
 ## Running the Image

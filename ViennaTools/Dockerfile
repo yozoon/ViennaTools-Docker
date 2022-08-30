@@ -13,6 +13,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive TZ=Europe/Vienna apt-get in
     cmake \
     libvtk9.1 \
     libvtk9-dev \
+    qtbase5-dev \
     libembree3-3 \
     libembree-dev \
     wget && rm -rf /var/lib/apt/lists/*
@@ -24,11 +25,9 @@ RUN wget https://github.com/ViennaTools/ViennaRay/archive/$VIENNARAY_GIT_COMMIT.
     --directory /ViennaTools && mv /ViennaTools/ViennaRay-$VIENNARAY_GIT_COMMIT /ViennaTools/ViennaRay
 COPY viennals_cmake.patch ViennaLS/cmake.patch
 RUN cd ViennaLS && patch -u CMakeLists.txt -i cmake.patch && mkdir build && cd build && cmake .. \
-    -D VTK_DIR=/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1/ \
     -D CMAKE_INSTALL_PREFIX=/usr && make buildDependencies && make install
 COPY viennaray_cmake.patch ViennaRay/cmake.patch
 RUN cd ViennaRay && patch -u CMakeLists.txt -i cmake.patch && mkdir build && cd build && cmake .. \
-    -D embree_DIR=/usr/lib/x86_64-linux-gnu/cmake/embree-3.12.2/ \
     -D CMAKE_INSTALL_PREFIX=/usr && make install
 WORKDIR /mnt/output
 USER 1000:1000

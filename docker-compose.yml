@@ -1,8 +1,8 @@
 version: "3.9"
 services:
-  viennaps:
+  viennatools:
     build:
-      context: ./ViennaPS
+      context: ./ViennaTools
       args:
         VIENNALS_GIT_COMMIT: fcaa9c486e40a299c3144a89043647ac9006ba3c
         VIENNARAY_GIT_COMMIT: 35b5aed51593cb501f3409e0343016fd956c1c8d

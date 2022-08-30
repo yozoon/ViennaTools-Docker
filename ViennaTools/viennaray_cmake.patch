@@ -1,0 +1,20 @@
+--- a.cmake	2022-08-30 22:56:03.502069685 +0200
++++ b.cmake	2022-08-30 23:37:06.829618865 +0200
+@@ -33,6 +33,9 @@
+ 
+ # build dependencies
+ set(DEPENDENCIES_DIR ${CMAKE_SOURCE_DIR}/dependencies)
++
++find_package(embree 3.0 REQUIRED)
++
+ # if using external embree build because it takes long to rebuild
+ # move value of embree_DIR to cache so it is not overwritten
+ # by external project
+@@ -86,7 +89,6 @@
+ add_library(${PROJECT_NAME} INTERFACE)
+ 
+ # set the correct paths for installation
+-set(CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}/")
+ set(LOCAL_CONFIG_DIR "lib/cmake/${PROJECT_NAME}")
+ 
+ # Adding the install interface generator expression makes sure that the include
