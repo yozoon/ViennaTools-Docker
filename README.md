@@ -1,4 +1,4 @@
-# Pre-Configured Docker Image for Creating Applications that use ViennaTools
+# Pre-Configured Docker Image for Creating Applications using ViennaTools
 
 ```bash
 # Build the image
