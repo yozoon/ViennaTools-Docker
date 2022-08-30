@@ -1,0 +1,15 @@
+output/
+*.tar
+*a.out
+build*
+install*
+*.vtk
+*.vtu
+*.vtp
+*.vscode
+.vs
+CMakeSettings.json
+docs/doxygen/*.txt
+!docs/doxygen/doxygen_template.txt
+/dependencies
+.cache
