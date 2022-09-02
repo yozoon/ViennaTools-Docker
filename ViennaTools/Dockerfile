@@ -25,7 +25,7 @@ RUN cd ViennaLS && patch -u CMakeLists.txt -i cmake.patch && mkdir build && cd b
     -D CMAKE_INSTALL_PREFIX=/usr && make buildDependencies && make install
 COPY viennaray_cmake.patch ViennaRay/cmake.patch
 RUN cd ViennaRay && patch -u CMakeLists.txt -i cmake.patch && mkdir build && cd build && cmake .. \
-    -D CMAKE_INSTALL_PREFIX=/usr && make install
+    -D CMAKE_INSTALL_PREFIX=/usr && make -j $(nproc) && make install
 WORKDIR /mnt/output
 USER 1000:1000
-CMD cmake /mnt/project && make && bash run.sh
+CMD cmake /mnt/project && make -j $(nproc) && bash run.sh
