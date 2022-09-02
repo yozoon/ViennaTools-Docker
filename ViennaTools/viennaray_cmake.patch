@@ -1,16 +1,19 @@
---- a.cmake	2022-08-30 22:56:03.502069685 +0200
-+++ b.cmake	2022-08-30 23:37:06.829618865 +0200
-@@ -33,6 +33,9 @@
+--- a.cmake	2022-09-02 11:16:23.220457537 +0200
++++ b.cmake	2022-09-02 11:21:54.781896292 +0200
+@@ -33,6 +33,12 @@
  
  # build dependencies
  set(DEPENDENCIES_DIR ${CMAKE_SOURCE_DIR}/dependencies)
 +
-+find_package(embree 3.0 REQUIRED)
++# Pre-built embree package is only available on x86_64
++if(${CMAKE_SYSTEM_PROCESSOR} MATCHES "x86_64")
++  find_package(embree 3.0 REQUIRED)
++endif()
 +
  # if using external embree build because it takes long to rebuild
  # move value of embree_DIR to cache so it is not overwritten
  # by external project
-@@ -86,7 +89,6 @@
+@@ -86,7 +92,6 @@
  add_library(${PROJECT_NAME} INTERFACE)
  
  # set the correct paths for installation
