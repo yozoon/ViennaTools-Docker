@@ -6,10 +6,9 @@ install*
 *.vtk
 *.vtu
 *.vtp
-*.vscode
-.vs
+*.vscode/
 CMakeSettings.json
 docs/doxygen/*.txt
 !docs/doxygen/doxygen_template.txt
-/dependencies
+!.github/
 .cache
