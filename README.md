@@ -4,8 +4,6 @@
 
 This project requires a working installation of Docker (and docker compose), which can be obtained from [docker.com](https://www.docker.com/).
 
-Currently only __x86_64__ machines are supported!
-
 ## Building the Image
 
 > If you only want to use the image, you can skip this step.
