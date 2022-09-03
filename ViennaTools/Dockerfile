@@ -32,6 +32,7 @@ RUN if test "$(uname -m)" != 'x86_64'; \
         -D EMBREE_TUTORIALS=OFF \
         -D EMBREE_BACKFACE_CULLING=OFF \
         -D EMBREE_FILTER_FUNCTION=ON \
+        -D EMBREE_ISPC_SUPPORT=OFF \
         -D EMBREE_TASKING_SYSTEM:STRING=INTERNAL \
         && make -j $(nproc) \
         && make install; \
