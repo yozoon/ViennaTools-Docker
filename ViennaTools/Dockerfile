@@ -1,42 +1,13 @@
 # syntax=docker/dockerfile:1
-FROM ubuntu:22.04
+FROM alpine:3.16
 
-# The libembree* packages only exists for x86_64, thus we have to change our install dependencies
-# if we are on another architecture
-RUN export DEPENDENCIES="apt-utils build-essential git cmake libvtk9.1 libvtk9-dev qtbase5-dev wget" \
-    && if test "$(uname -m)" = 'x86_64'; then \
-        export DEPENDENCIES="$DEPENDENCIES libembree3-3 libembree-dev"; \
-    fi \
-    && apt-get update \
-    && DEBIAN_FRONTEND=noninteractive TZ=Europe/Vienna \
-    apt-get install -y --no-install-recommends $DEPENDENCIES \
-    && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache bash gcc g++ patch make cmake git wget vtk vtk-dev embree embree-dev
+
+ENV CC=/usr/bin/gcc
+ENV CXX=/usr/bin/g++
 
 RUN mkdir -p /ViennaTools
 WORKDIR /ViennaTools
-
-# Download Embree (non x86_64 only)
-ENV EMBREE_GIT_COMMIT=7c53133eb21424f7f0ae1e25bf357e358feaf6ab
-RUN if test "$(uname -m)" != 'x86_64'; then \
-        wget https://github.com/embree/embree/archive/$EMBREE_GIT_COMMIT.tar.gz \
-        -O /tmp/embree.tar.gz \
-        && tar -xf /tmp/embree.tar.gz --directory /ViennaTools \
-        && mv /ViennaTools/embree-$EMBREE_GIT_COMMIT /ViennaTools/embree; \
-    fi
-
-# Build and install Embree (non x86_64 only)    
-RUN if test "$(uname -m)" != 'x86_64'; \
-    then \
-        cd embree && mkdir build && cd build && cmake .. \
-        -D CMAKE_INSTALL_PREFIX=/usr \
-        -D EMBREE_TUTORIALS=OFF \
-        -D EMBREE_BACKFACE_CULLING=OFF \
-        -D EMBREE_FILTER_FUNCTION=ON \
-        -D EMBREE_ISPC_SUPPORT=OFF \
-        -D EMBREE_TASKING_SYSTEM:STRING=INTERNAL \
-        && make -j $(nproc) \
-        && make install; \
-    fi
 
 # Download ViennaLS
 ENV VIENNALS_GIT_COMMIT=fcaa9c486e40a299c3144a89043647ac9006ba3c
@@ -74,4 +45,4 @@ RUN cd ViennaRay \
 COPY launch.sh launch.sh
 WORKDIR /mnt/output
 USER 1000:1000
-CMD bash /ViennaTools/launch.sh
+ENTRYPOINT ["bash", "/ViennaTools/launch.sh"]

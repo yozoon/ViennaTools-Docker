@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.4)
 
 project("Trench2D")
 
+set(CMAKE_CXX_STANDARD 17)
+
 find_package(ViennaLS REQUIRED)
 find_package(ViennaRay REQUIRED)
 
