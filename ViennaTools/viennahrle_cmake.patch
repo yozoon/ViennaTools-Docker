@@ -1,0 +1,10 @@
+--- a.cmake	2022-09-05 11:53:17.506357551 +0200
++++ b.cmake	2022-09-05 11:53:38.716133085 +0200
+@@ -9,7 +9,6 @@
+ add_library(${PROJECT_NAME} INTERFACE)
+ 
+ # set the correct paths for installation
+-set(CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}/")
+ set(LOCAL_CONFIG_DIR "lib/cmake/${PROJECT_NAME}")
+ 
+ # Adding the install interface generator expression makes sure that the include

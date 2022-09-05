@@ -1,6 +1,6 @@
---- c.cmake	2022-08-30 23:09:36.929287351 +0200
-+++ d.cmake	2022-08-30 23:32:36.588006871 +0200
-@@ -41,6 +41,12 @@
+--- a.cmake	2022-09-05 12:02:42.805349704 +0200
++++ b.cmake	2022-09-05 12:03:46.245674689 +0200
+@@ -41,6 +41,14 @@
  
  ## build dependencies
  set(DEPENDENCIES_DIR ${CMAKE_SOURCE_DIR}/dependencies)
@@ -10,10 +10,12 @@
 +  vtkCommonDataModel
 +  vtkIOXML)
 +
++find_package(ViennaHRLE REQUIRED)
++
  # if using external VTK build because it takes long to rebuild
  # move value of VTK_DIR to cache so it is not overwritten
  # by external project
-@@ -122,7 +128,6 @@
+@@ -122,7 +130,6 @@
  endif(VIENNALS_BUILD_SHARED_LIBS)
  
  # set the correct paths for installation

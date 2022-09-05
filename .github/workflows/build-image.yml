@@ -27,5 +27,3 @@ jobs:
           tags: yozoon/viennatools:latest
           cache-from: type=registry,ref=yozoon/viennatools:buildcache
           cache-to: type=registry,ref=yozoon/viennatools:buildcache,mode=max
-          build-args: |
-            squash=1

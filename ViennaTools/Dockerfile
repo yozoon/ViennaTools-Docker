@@ -9,6 +9,21 @@ ENV CXX=/usr/bin/g++
 RUN mkdir -p /ViennaTools
 WORKDIR /ViennaTools
 
+# Download ViennaHRLE
+ENV VIENNAHRLE_GIT_COMMIT=a17d6a7a45fc489df389174ed247a3d72e541af0
+RUN wget https://github.com/ViennaTools/ViennaHRLE/archive/$VIENNAHRLE_GIT_COMMIT.tar.gz \
+    -O /tmp/ViennaHRLE.tar.gz \
+    && tar -xf /tmp/ViennaHRLE.tar.gz --directory /ViennaTools \
+    && mv /ViennaTools/ViennaHRLE-$VIENNAHRLE_GIT_COMMIT /ViennaTools/ViennaHRLE
+
+# Build and install ViennaHRLE
+COPY viennahrle_cmake.patch ViennaHRLE/cmake.patch
+RUN cd ViennaHRLE \
+    && patch -u CMakeLists.txt -i cmake.patch \
+    && mkdir build && cd build \
+    && cmake .. -D CMAKE_INSTALL_PREFIX=/usr \
+    && make install
+
 # Download ViennaLS
 ENV VIENNALS_GIT_COMMIT=fcaa9c486e40a299c3144a89043647ac9006ba3c
 RUN wget https://github.com/ViennaTools/ViennaLS/archive/$VIENNALS_GIT_COMMIT.tar.gz \
@@ -41,6 +56,8 @@ RUN cd ViennaRay \
     && cmake .. -D CMAKE_INSTALL_PREFIX=/usr \
     && make -j $(nproc) \
     && make install
+
+RUN rm -rf /ViennaTools/ViennaLS /ViennaTools/ViennaRay /ViennaTools/ViennaHRLE
 
 COPY launch.sh launch.sh
 WORKDIR /mnt/output
