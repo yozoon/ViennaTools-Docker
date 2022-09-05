@@ -6,7 +6,8 @@ This project requires a working installation of Docker (and docker compose), whi
 
 ## Building the Image
 
-You can find the instructions [here](ViennaTools/README.md). 
+You can find the instructions [here](ViennaTools/README.md).
+
 ## Usage
 
 The fastest way to get started is by using a pre-built image. This can be accomplished by running the following command:
